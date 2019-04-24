@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateBroadcastsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('broadcasts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('password');
-            $table->string('role')->default('user')->comment('用户角色');
-            $table->rememberToken();
+            $table->text('title')->comment('通知标题');
+            $table->longText('body')->comment('通知内容');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('broadcasts');
     }
 }

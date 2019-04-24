@@ -40,7 +40,20 @@ $api->version('v1', [
     ], function ($api) {
         //
         $api->group(['middleware' => 'api.auth'], function ($api) {
-            //
+            $api->get('queue', 'QueueController@store')
+                ->name('api.queue.store');
+
+            $api->get('queue/current', 'QueueController@index')
+                ->name('api.queue.index');
+
+            $api->delete('queue/current', 'QueueController@delete')
+                ->name('api.queue.delete');
         });
+
+        $api->get('broadcasts', 'BroadcastsController@index')
+            ->name('api.broadcasts.index');
+
+        $api->get('broadcasts/{broadcast}', 'BroadcastsController@show')
+            ->name('api.broadcasts.show');
     });
 });
